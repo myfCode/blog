@@ -1,5 +1,6 @@
 function compose(...middlewares) {
-    return middlewares.reduce((a, b) => (...args) => b(a(...args)))
+    return middlewares.reduce((a, b) => (...args) => a(b(...args)))
 }
+
 
 export default compose

@@ -1,13 +1,36 @@
 import compose from './compose'
 
-let applyMiddleware = (...middlewares) => store => (...args) => action => {
-    let storeApi = store.createStore(...args)
+// 方法一
+let applyMiddleware1 = (...middlewares) => {
+    return createStore => (...args) => {
+        const store = createStore(...args)
 
+        let dispatch = () => {
+            throw new Error(
+                `Dispatching while constructing your middleware is not allowed. ` +
+                `Other middleware would not be applied to this dispatch.`
+            )
+        }
+
+        const middlewareAPI = {
+            getState: store.getState,
+            dispatch: (...args) => dispatch(...args)
+        }
+
+        const chain = middlewares.map(middleware => middleware(middlewareAPI))
+        dispatch = compose(...chain)(store.dispatch)
+
+        return {
+            ...store,
+            dispatch
+        }
+    }
 }
 
 
-//解析版
-let applyMiddleware = function (...middlewares) {
+
+//方法二
+let applyMiddleware2 = function (...middlewares) {
     return function (storeFn) {
         return function (...args) {
 
@@ -34,5 +57,5 @@ let applyMiddleware = function (...middlewares) {
     }
 }
 
-export default applyMiddleware
+export default applyMiddleware2
 
