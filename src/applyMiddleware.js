@@ -77,10 +77,13 @@ let applyMiddleware2 = function (...middlewares) {
             let chain = middlewares.map(middleware => middleware(initStoreApi))
 
             /***
-             *
+             *使用compose方法，返回一个function，赋值给上面定义的dispatch，这个function的参数就是action
              */
             dispatch = compose(...chain)(store.dispatch)
 
+            /***
+             * 生成新的store，dispatch覆盖默认的方法
+             */
             return {
                 ...store,
                 dispatch
