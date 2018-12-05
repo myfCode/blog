@@ -6,8 +6,8 @@
 
 export default function combineReducers(reducersObj) {
     
-  if(){
-      Object.prototype.toString.call(reducersObj) !== '[object Object]'
+  if( Object.prototype.toString.call(reducersObj) !== '[object Object]'){
+     
        throw new Error('参数必须是Object类型')
    } 
     
