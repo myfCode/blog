@@ -1,3 +1,4 @@
+
 let randomNum = function (len) {
     function _createNum() {
         return (Math.random() * 100 + '').split('.')[0]
