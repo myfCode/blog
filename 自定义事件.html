@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+
+        #outer {
+            width: 300px;
+            height: 300px;
+            background-color: gray;
+            margin: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <div id="outer"></div>
+    <script>
+
+        const $ = function (domId) {
+            return document.getElementById(domId)
+        }
+
+        /**方法一***/
+        // 第一步：创建并分发事件
+        var event = new CustomEvent("cat", { "detail": { "hazcheeseburger": true } })
+
+        // 第二步：添加一个适当的事件监听器
+        $('box').addEventListener("cat", function (e) {
+            console.log(e)
+            console.log(e.detail)
+        })
+
+
+        $('box').onclick = function () {
+            //第三步：触发
+            $('box').dispatchEvent(event)
+        }
+
+        /***方法二***/
+        //第一步：初始化
+        let ev = document.createEvent('CustomEvent')
+        ev.initCustomEvent('eventName', false, true, { name: 'nsh', age: 23 })
+
+        //第二步：监听
+        $('outer').addEventListener('eventName', function (e) {
+            console.log(e)
+            console.log(e.detail)
+        })
+
+        //第三步：触发
+        $('outer').onclick = function () {
+            $('outer').dispatchEvent(ev)
+        }
+
+
+    </script>
+
+    <script>
+        document.addEventListener('click', function (e) {
+            console.log(e)
+        })
+    </script>
+</body>
+
+</html>
