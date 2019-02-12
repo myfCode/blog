@@ -1,4 +1,7 @@
-
+/**
+ * 生成长度为len的随机数
+ * @param {生成长度为len的随机数} len 
+ */
 let randomNum = function (len) {
     function _createNum() {
         return (Math.random() * 100 + '').split('.')[0]
