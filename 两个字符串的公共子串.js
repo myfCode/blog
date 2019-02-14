@@ -1,3 +1,51 @@
+function findCommonStr(str1, str2) {
+
+    let len1 = str1.length
+    let len2 = str2.length
+
+    //定义二维数组
+    var arr = new Array(len1 + 1)
+    for (let i = 0; i < len1 + 1; i++) {
+        arr[i] = new Array(len2 + 1)
+        for (let j = 0; j < len2 + 1; j++) {
+            arr[i][j] = 0
+        }
+    }
+
+    let max = 0;
+    let index = 0;
+    for (let m = 0; m <= len1; m++) {
+        for (let n = 0; n <= len2; n++) {
+            if (m == 0 || n == 0) {//默认第一行、第一列都为0
+                arr[m][n] = 0
+                // continue
+            } else {
+                if (str1[m - 1] === str2[n - 1]) {//如过字符一样，就等于斜对角上一个位置的数值+1
+                    arr[m][n] = arr[m - 1][n - 1] + 1
+                } else {//字符不一样就对应二维数组位置写0
+                    arr[m][n] = 0
+                }
+
+            }
+
+            if (max < arr[m][n]) {
+                max = arr[m][n]
+                index = m
+            }
+
+        }
+    }
+
+    console.log(max, index)
+
+    //如果最大值位0，就没有公共的字符串；如果有，就剪切出那个字符串
+    return max == 0 ? '' : str1.slice(index - max, index)
+
+}
+
+findCommonStr('asddf', 'wersdfs')
+
+
 function lcs(word1, word2) {
     var max = 0;
     var index = 0;

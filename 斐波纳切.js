@@ -18,3 +18,16 @@ let fibonacc = function (len) {
 
 fibonacc(10)
 
+
+//动态规划实现斐波纳切
+function fibc(n) {
+    let reust = 1
+    let last = 1
+    let prevLast = 1
+    for (let i = 2; i < n; i++) {
+        result = last + prevLast
+        prevLast = last
+        last = result
+    }
+    return result
+}
