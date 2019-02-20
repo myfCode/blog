@@ -173,6 +173,26 @@ class BinraryTree {
         }
         return { node: currentNode, parent: parentNode, position: 'left' }
     }
+    /**
+     * 镜像二叉树
+     *  */
+    mirror(){
+        var root = this.root
+        if(root === null){
+            return root
+        }
+
+        let reverse = (node) => {
+            if(!node.left && !node.right) return
+            let temp = node.left
+            node.right = node.left
+            node.left = temp
+            node.left && reverse(node.left)
+            node.right && reverse(node.right)
+        }
+
+        reverse(root)
+    }
 }
 
 var bin = new BinraryTree()

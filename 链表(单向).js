@@ -131,6 +131,28 @@ class LinkList {
         }
         return true
     }
+
+    /**
+     * 反转链表
+     */
+    reverse(){
+        var temp = new Node({name: null})
+
+        temp.next = this.head
+        var pre = temp.next
+        var cur = pre.next
+
+        while(cur != null){
+            pre.next = cur.next
+            cur.next = pre
+            temp.next = cur
+
+            cur = pre.next
+        }
+
+        return temp.next
+
+    }
 }
 
 //测试demo
