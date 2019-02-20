@@ -115,13 +115,14 @@ let shellSort = function (arr, gaps) {
     }
     let len = arr.length;
     let temp, gap, i, j, k;
-    for (i = 0, gapsLen = gaps.length; i < len; i++) {
+    let gapsLen = gaps.length;
+    for (i = 0; i < gapsLen; i++) {
         gap = gaps[i]
         for (j = gap; j < len; j++) {
             temp = arr[j]
             k = j
             while (k > 0 && arr[k - gap] > temp) {
-                arr[j] = arr[k - gap]
+                arr[k] = arr[k - gap]
                 k -= gap
             }
             arr[k] = temp
@@ -166,7 +167,7 @@ let mergeSort = function(arr){
 
     let mid = Math.floor(len / 2)
     let left = arr.slice(0, mid)
-    let right = arr.slice(mid + 1)
+    let right = arr.slice(mid)
 
     return mergeArray(mergeSort(left), mergeSort(right))
 }
